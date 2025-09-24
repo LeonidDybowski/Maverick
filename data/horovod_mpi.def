@@ -1,0 +1,33 @@
+Bootstrap: docker
+From: nvcr.io/nvidia/tensorflow:24.11-tf2-py3  # TensorFlow 2.17.0, CUDA 12.2, Horovod 0.28.1, OpenMPI 4.1.7 base
+
+%post
+    echo "Updating package index and installing build essentials..."
+    apt-get update && apt-get install -y --no-install-recommends build-essential wget ca-certificates && apt-get clean
+
+    python3 -m pip install --upgrade pip setuptools wheel
+
+    echo "Installing Python libraries (pandas, numpy, etc.) with compatible versions..."
+    python3 -m pip install --no-cache-dir \
+        numpy==1.26.0 \
+        pandas==2.2.2 \
+        scipy==1.12.0 \
+        scikit-learn==1.5.0 \
+        matplotlib==3.10.3 \
+        seaborn==0.13.2 \
+        transformers==4.39.3 \
+        tf-models-no-deps==2.17.0
+
+%environment
+    # MPI optimization to avoid known shared-memory issues (disable CMA copy mechanism)
+    export OMPI_MCA_btl_vader_single_copy_mechanism=none
+    # Allow TF to not grab all GPU memory at once (for multi-process GPU sharing)
+    export TF_FORCE_GPU_ALLOW_GROWTH=true
+    export HOROVOD_GPU_ALLREDUCE=NCCL
+    export HOROVOD_GPU_ALLGATHER=NCCL
+    export HOROVOD_GPU_BROADCAST=NCCL
+    # (The base image will also have other env vars set for CUDA, NCCL, etc., by NVIDIA)
+
+%runscript
+    echo "Container for TensorFlow ${TF_VERSION:-2.17} with Horovod. Use mpirun/srun to launch distributed training."
+    exec "$@"

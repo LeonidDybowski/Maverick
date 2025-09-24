@@ -1,0 +1,64 @@
+### Step 1: Setup a conda environment for installing Maverick's dependencies
+# Step 1.1: If you do not already have Miniconda or Anaconda installed on your system, install them, otherwise skip to step 1.2
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+chmod 700 Miniconda3-latest-Linux-x86_64.sh
+./Miniconda3-latest-Linux-x86_64.sh
+# install in default location, agree to license terms
+
+exec bash # restart your shell
+
+# Step 1.2: create the Maverick conda environment
+conda create -y -n maverick python=3.7
+conda activate maverick
+
+### Step 2: Install Maverick dependencies
+# You may need to install/update gcc-c++ for the following steps to work. E.g., "sudo yum install gcc-c++" in CentOS/RHEL or "sudo apt install g++" in Ubuntu
+# Step 2.1: GPU-specific installation steps (skip to step 2.2 if you do not have a GPU in your system)
+conda install -y -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/
+# please note that on some systems, setting the LD_LIBRARY_PATH this way causes problems and you may need to run 'unset LD_LIBRARY_PATH' to use normal bash utilities again
+
+# Step 2.2: Install dependencies
+pip install pandas matplotlib scikit-learn scipy biopython tensorflow==2.7 transformers tf-models-official==2.7
+pip install numpy --upgrade
+conda install -y dos2unix git
+
+### Step 3: Download the Maverick annotation files and model weights
+wget https://zuchnerlab.s3.amazonaws.com/VariantPathogenicity/MAVERICK/Maverick_resources.tar.gz
+tar -zxvf Maverick_resources.tar.gz
+rm Maverick_resources.tar.gz
+
+### Step 4: Setup Annovar
+# Step 4.1: Download Annovar
+# Annovar executables are bound by both academic and commercial licenses, but can be downloaded (after registration) from https://www.openbioinformatics.org/annovar/annovar_download_form.php
+# Users must obtain their own licenses for use of Annovar and then move the release archive to the directory where Maverick is being set up in order to continue. 
+
+# Step 4.2: Extract Annovar to a new annovar/ subdirectory.
+tar -zxvf annovar.tar.gz
+
+# Step 4.3: Configure the Gencode annotations for use with Annovar (GRCh37)
+cd annovar/
+./annotate_variation.pl -downdb -build hg19 seq humandb/hg19_seq/
+./annotate_variation.pl --build hg19 --downdb wgEncodeGencodeBasicV33lift37 humandb/
+./retrieve_seq_from_fasta.pl -format genericGene -seqdir humandb/hg19_seq/ -outfile humandb/hg19_wgEncodeGencodeBasicV33lift37Mrna.fa humandb/hg19_wgEncodeGencodeBasicV33lift37.txt 
+cd ../
+
+# Step 4.4: Configure the Gencode annotations for use with Annovar (GRCh38)
+cd annovar/
+./annotate_variation.pl -downdb -build hg38 seq humandb/hg38_seq/
+# The following line of code may not be necessary with newer versions of Annovar. Use as needed. 
+mv humandb/hg38_seq/chroms/* humandb/hg38_seq/
+./annotate_variation.pl --build hg38 --downdb wgEncodeGencodeBasicV33 humandb/
+./retrieve_seq_from_fasta.pl -format genericGene -seqdir humandb/hg38_seq/ -outfile humandb/hg38_wgEncodeGencodeBasicV33Mrna.fa humandb/hg38_wgEncodeGencodeBasicV33.txt 
+cd ../
+
+### Step 5: Clone the Maverick repository
+git clone https://github.com/ZuchnerLab/Maverick.git
+
+### Step 6: (Optional) Run the demo/example
+chmod 700 Maverick/InferenceScripts/runMaverick.sh
+Maverick/InferenceScripts/runMaverick.sh Maverick/example/example.vcf
+# Running this demo should take 10-15 minutes, depending on your system. Most of that time is spent in annotation. 
+# You can see the intended outputs of the example run in the Maverick/example directory. 
+# You can alternatively work with VCF files aligned to GRCh38 by setting the "-g" parameter. For example: "Maverick/InferenceScripts/runMaverick.sh -g example_grch38.vcf"
+
