@@ -70,7 +70,7 @@ As can be seen from the learning curves, most of the submodels had an expected i
 
 ### Results
 
-The evaluation of the models was done using the test set from ClinVar 2021 and the test set obtained from Infevers, as well as 64 patients, for which the pathogenic/likely pathogenic variant was detected in one of the AID genes. The results are shown on the pictures below.
+The evaluation of the models was done using the test set from ClinVar 2021 and the test set obtained from Infevers, as well as 64 patients, for which the pathogenic/likely pathogenic variant was detected in one of the AID genes. In cases of the ClinVar and Infevers test sets, the test variants were dropped from the training set.
 
 ### ClinVar test set
 
