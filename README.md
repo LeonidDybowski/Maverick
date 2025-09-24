@@ -27,14 +27,14 @@ The list of files used for the variant annotation is shown in the table below.
 |Inheritance map|genemap2_20200114.txt|genemap2_20240702.txt|
 |ANNOVAR database|wgEncodeGencodeBasicV33lift37|wgEncodeGencodeBasicV47|
 |Approved transcripts|gencodeBasicFullLengthTranscripts-<br>ConversionTable.txt|gencodeBasicFullLengthTranscripts-<br>ConversionTable_v47.txt|
-|Canonical transcripts|gnomad211_constraint_simple_canonical.txt|gnomad.v4.1.constraint_simple_canonical.tsv|
+|Canonical transcripts|gnomad211_constraint-<br>_simple_canonical.txt|gnomad.v4.1.constraint-<br>_simple_canonical.tsv|
 |Gencode transcripts|gencode.v33lift37.pc_translations.fa|gencode.v47.pc_translations.fa|
 |GTEx|GTEx.V7.tx_medians.021820.tsv|GTEx.v10.medians.tsv|
-|pLI|gnomad211_constraint_simple_canonical.txt|gnomad.v4.1.constraint_simple_canonical.tsv|
-|pRec|gnomad211_constraint_simple_canonical.txt|gnomad.v4.1.constraint_simple_canonical.tsv|
-|pNull|gnomad211_constraint_simple_canonical.txt|gnomad.v4.1.constraint_simple_canonical.tsv|
-|mis_z|gnomad211_constraint_simple_canonical.txt|gnomad.v4.1.constraint_simple_canonical.tsv|
-|lof_z|gnomad211_constraint_simple_canonical.txt|gnomad.v4.1.constraint_simple_canonical.tsv|
+|pLI|gnomad211_constraint-<br>_simple_canonical.txt|gnomad.v4.1.constraint-<br>_simple_canonical.tsv|
+|pRec|gnomad211_constraint-<br>_simple_canonical.txt|gnomad.v4.1.constraint-<br>_simple_canonical.tsv|
+|pNull|gnomad211_constraint-<br>_simple_canonical.txt|gnomad.v4.1.constraint-<br>_simple_canonical.tsv|
+|mis_z|gnomad211_constraint-<br>_simple_canonical.txt|gnomad.v4.1.constraint-<br>_simple_canonical.tsv|
+|lof_z|gnomad211_constraint-<br>_simple_canonical.txt|gnomad.v4.1.constraint-<br>_simple_canonical.tsv|
 |controls AF|gnomad211_exomes_AFs.txt|gnomad410_GRCh38_exomes_AFs.txt|
 |controls nhomalt|gnomad211_exomes_AFs.txt|gnomad410_GRCh38_exomes_AFs.txt|
 |CCR|ccrs.enumerated.txt|ccrs_GRCh38.enumerated.txt|
