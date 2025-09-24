@@ -23,10 +23,10 @@ The list of files used for the variant annotation is shown in the table below.
 |Data|Original assembly|Updated assembly|
 |-|-|-|
 |ClinVar variants|variant_summary_2020-01.txt|variant_summary_2025-01.txt|
-|gnomAD benign variants|gnomADVariantsSeenAsHomAltTwiceInExomes.txt|gnomad.exomes.v4.1.sites.benign.txt|
+|gnomAD benign variants|gnomADVariantsSeenAsHomAlt-<br>TwiceInExomes.txt|gnomad.exomes.v4.1.sites.benign.txt|
 |Inheritance map|genemap2_20200114.txt|genemap2_20240702.txt|
 |ANNOVAR database|wgEncodeGencodeBasicV33lift37|wgEncodeGencodeBasicV47|
-|Approved transcripts|gencodeBasicFullLengthTranscriptsConversionTable.txt|gencodeBasicFullLengthTranscriptsConversionTable_v47.txt|
+|Approved transcripts|gencodeBasicFullLengthTranscripts-<br>ConversionTable.txt|gencodeBasicFullLengthTranscripts-<br>ConversionTable_v47.txt|
 |Canonical transcripts|gnomad211_constraint_simple_canonical.txt|gnomad.v4.1.constraint_simple_canonical.tsv|
 |Gencode transcripts|gencode.v33lift37.pc_translations.fa|gencode.v47.pc_translations.fa|
 |GTEx|GTEx.V7.tx_medians.021820.tsv|GTEx.v10.medians.tsv|
