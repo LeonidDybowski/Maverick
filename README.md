@@ -116,6 +116,8 @@ This work demonstrated several findings. Firstly, training on the larger amount 
 
 All of this holds true only if the training was done correctly. If the sharding on the 4 GPU workers was done inaccurately, this would explain the unexpected prediction patterns. Several things have been tried to correct it, such as Adam optimizer, clipping the gradients, focal loss, different learning rate and division factors, as well as different strategies for the validation sample sharding and shuffling. But so far, the results show no expected improvement from the original model.
 
+There are several potential lines for improvement of the resulted model. Firstly, training it with cross-validation. Secondly, trainining models of Architecture 1 on CPU to test whether the distributed setup affects the predicion. Thirdy, setting a stricter threshold for the variants in gnomAD to be called binign (being observed as homozygous in 5 individuals instead of 2). Finally, creating of addition metrics for each variant and training the model on a higher number of features.
+
 ### References
 
 > Danzi MC, Dohrn MF, Fazal S, Beijer D, Rebelo AP, Cintra V, et al. Deep structured learning for variant prioritization in Mendelian diseases. Nat Commun. 2023 July 13;14(1):4167. 
